@@ -23,7 +23,7 @@ public class PaddleMooving : MonoBehaviour
     private void StartMoovement(InputAction.CallbackContext context)
     {
         StartCoroutine(PaddleMoovement(context));
-        PaddleDirectionMoovement = new Vector2(context.ReadValue<float>()*20, 0);
+        //PaddleDirectionMoovement = new Vector2(context.ReadValue<float>()*20, 0);
     }
 
     private IEnumerator PaddleMoovement(InputAction.CallbackContext context)
@@ -34,7 +34,7 @@ public class PaddleMooving : MonoBehaviour
 
             yield return null;
         }
-        PaddleDirectionMoovement = Vector2.zero;
+        //PaddleDirectionMoovement = Vector2.zero;
     }
 
     public class Factory : PlaceholderFactory<PaddleMooving> { }

@@ -26,10 +26,37 @@ public class SimpleBall : MonoBehaviour, IBall
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag == GlobalVariables.PLATFORM_TAG)
+        if (collision.collider.tag == GlobalVariables.PLATFORM_CENTER_TAG)
         {
-            _rigidbody.AddForce(_paddleMooving.PaddleDirectionMoovement, ForceMode2D.Impulse);
+            _rigidbody.velocity = Vector2.up * _ballSpeed;
+            Debug.Log("УДАр Центр");
+        }
+        else if (collision.collider.tag == GlobalVariables.PLATFORM_RIGHT_TAG)
+        {
+            _rigidbody.AddForce(Vector2.right * 8, ForceMode2D.Impulse);
             _rigidbody.velocity = _rigidbody.velocity.normalized * _ballSpeed;
+            Debug.Log("УДАр Право");
+
+        }
+        else if (collision.collider.tag == GlobalVariables.PLATFORM_LEFT_TAG)
+        {
+            _rigidbody.AddForce(Vector2.left * 8, ForceMode2D.Impulse);
+            _rigidbody.velocity = _rigidbody.velocity.normalized * _ballSpeed;
+            Debug.Log("УДАр Лево");
+
+        }
+        else
+        {
+            switch (Random.Range(0, 1))
+            {
+                case 0:
+                    _rigidbody.AddForce(Vector2.left, ForceMode2D.Impulse);
+                    break;
+                case 1:
+                    _rigidbody.AddForce(Vector2.right, ForceMode2D.Impulse);
+                    break;
+            }
+
         }
     }
 

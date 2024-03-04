@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System;
 using System.Collections;
 using Unity.Burst.CompilerServices;
@@ -20,43 +21,42 @@ public class MediaMaterialController : MonoBehaviour
         StopAllCoroutines();
         _videoPlayer.clip = _negativeClip;
         _videoPlayer.Play();
-        StartCoroutine(CheckClipBehaviorCoroutine());
-
+        CheckClipBehaviorAsync().Forget();
     }
 
-    public void ChangeClip()
+    public async UniTaskVoid ChangeClipAsync()
     {
         if (CanPlayPositiveClip && !_positiveClipStarted)
         {
             _videoPlayer.clip = _positiveClip;
             _positiveClipStarted = true;
             _videoPlayer.Play();
-            StartCoroutine(WaitLagsCoroutine());
+           await WaitLagsAsync();
         }
         else if (!CanPlayPositiveClip && _positiveClipStarted)
         {
             _videoPlayer.clip = _negativeClip;
             _positiveClipStarted = false;
             _videoPlayer.Play();
-            StartCoroutine(WaitLagsCoroutine());
+          await WaitLagsAsync();
         }
-      
+
     }
 
-    private IEnumerator CheckClipBehaviorCoroutine()
+    private async UniTaskVoid CheckClipBehaviorAsync()
     {
         while (true)
         {
             CanPlayPositiveClip = false;
-            yield return new WaitForSeconds(2.0f);
-            ChangeClip();
+            await UniTask.Delay(2000);
+            ChangeClipAsync().Forget();
         }
     }
 
-    private IEnumerator WaitLagsCoroutine()
+    private async UniTask WaitLagsAsync()
     {
         _meshRenderer.enabled = false;
-        yield return new WaitForSeconds(0.1f);
+        await UniTask.Delay(100);
         _meshRenderer.enabled = true;
     }
 

@@ -16,7 +16,7 @@ public abstract class Block : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         _mediaController.CanPlayPositiveClip = true;
-        _mediaController.ChangeClip();
+        _mediaController.ChangeClipAsync().Forget();
         _lifes--;
         if (_lifes == 0)
         {
