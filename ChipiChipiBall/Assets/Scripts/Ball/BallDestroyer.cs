@@ -1,0 +1,14 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BallDestroyer : MonoBehaviour
+{
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == GlobalVariables.DEFAULT_TAG)
+        {
+            collision.gameObject.SetActive(false);
+        }
+    }
+}

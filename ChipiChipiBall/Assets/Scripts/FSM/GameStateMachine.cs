@@ -3,19 +3,22 @@ using Zenject;
 
 public class GameStateMachine : MonoBehaviour
 {
-
-    private SimpleBall.Factory _ballFactory;
+    private CustomePool<SimpleBall> _ballPool;
     private PaddleMooving _paddle;
+    private BallsController _ballsController;
 
     [Inject]
-    public void Construct(SimpleBall.Factory ballFactory, PaddleMooving paddleMooving)
+    public void Construct(CustomePool<SimpleBall> ball, PaddleMooving paddleMooving, BallsController ballsController)
     {
-        _ballFactory = ballFactory;
+        _ballPool = ball;
         _paddle = paddleMooving;
+        _ballsController = ballsController;
     }
 
     public void StartGame()
     {
-        _ballFactory.Create().transform.position = _paddle.transform.position + Vector3.up;
+        var ball = _ballPool.GetFromPool();
+        ball.transform.position = _paddle.transform.position + Vector3.up;
+        _ballsController.AddBallToList(ball);
     }
 }

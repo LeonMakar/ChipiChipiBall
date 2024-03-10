@@ -1,15 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public abstract class Bonus : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected BallsController BallController;
+
+    [Inject]
+    private void Construct(BallsController ballsController)
     {
-        Debug.Log(collision.tag);
-        if (collision.tag != GlobalVariables.DEFAULT_TAG)
-        {
-            Destroy(gameObject);
-        }
+        BallController = ballsController;
+
     }
+
 }

@@ -1,4 +1,3 @@
-using UnityEngine;
 using Zenject;
 public class ProjectInstaller : MonoInstaller, IInitializable
 {
@@ -11,6 +10,7 @@ public class ProjectInstaller : MonoInstaller, IInitializable
     {
         BindInstallerInterfases();
         BindDefaultActionMap();
+
     }
 
     private void BindDefaultActionMap()

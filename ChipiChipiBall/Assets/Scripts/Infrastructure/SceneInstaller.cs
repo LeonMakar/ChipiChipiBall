@@ -4,14 +4,29 @@ using Zenject;
 public class SceneInstaller : MonoInstaller, IInitializable
 {
     [SerializeField] private PaddleMooving _paddleMooving;
-    [SerializeField] private SimpleBall _ball;
     [SerializeField] private MediaMaterialController _mediaMaterialController;
+    [SerializeField] private GameObject _ballPrefab;
+    [SerializeField] private GameObject _X3BonusPrefab;
 
     public void Initialize()
     {
-        var ball = Container.InstantiatePrefab(_ball.gameObject);
-        ball.transform.position = _paddleMooving.transform.position + Vector3.up;
+
+        InitializeAllFactory();
+        InitializeAllPool();
+
         GlobalVariables.MEDIA = _mediaMaterialController;
+    }
+
+    private void InitializeAllPool()
+    {
+        Container.Resolve<CustomePool<SimpleBall>>().InitializePool(Container.Resolve<BallFactory>(), 500);
+        Container.Resolve<CustomePool<X3Bonus>>().InitializePool(Container.Resolve<BonusFactory<X3Bonus>>(), 20);
+    }
+
+    private void InitializeAllFactory()
+    {
+        Container.Resolve<BallFactory>().LoadFactoryResources(_ballPrefab);
+        Container.Resolve<BonusFactory<X3Bonus>>().LoadFactoryResources(_X3BonusPrefab);
 
     }
 
@@ -19,11 +34,52 @@ public class SceneInstaller : MonoInstaller, IInitializable
     {
         BindSceneInstalletInterfaces();
         BindPaddleMoovingScript();
-        BindBallFactory();
         BindMediaController();
-
+        BindSimpleBallFactory();
+        BindBallsController();
+        BindCustomeBallPool();
+        BindBonusX3Factory();
+        BindX3Pool();
     }
 
+    private void BindX3Pool()
+    {
+        Container
+            .Bind<CustomePool<X3Bonus>>()
+            .AsSingle()
+            .NonLazy();
+    }
+
+    private void BindBonusX3Factory()
+    {
+        Container
+            .Bind<BonusFactory<X3Bonus>>()
+            .AsSingle()
+            .NonLazy();
+    }
+
+    private void BindCustomeBallPool()
+    {
+        Container
+                    .Bind<CustomePool<SimpleBall>>()
+                    .AsSingle();
+    }
+
+    private void BindBallsController()
+    {
+        Container
+                    .Bind<BallsController>()
+                    .AsSingle()
+                    .NonLazy();
+    }
+    private void BindSimpleBallFactory()
+    {
+        Container.
+            Bind<BallFactory>()
+            .AsSingle()
+            .NonLazy();
+
+    }
     private void BindMediaController()
     {
         Container
@@ -39,13 +95,6 @@ public class SceneInstaller : MonoInstaller, IInitializable
              .FromInstance(this)
              .AsSingle()
              .NonLazy();
-    }
-
-    private void BindBallFactory()
-    {
-        Container
-            .BindFactory<SimpleBall, SimpleBall.Factory>()
-            .FromComponentInNewPrefab(_ball);
     }
 
     private void BindPaddleMoovingScript()
