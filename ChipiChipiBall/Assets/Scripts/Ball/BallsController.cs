@@ -118,7 +118,7 @@ public class CustomeStackOfActions
     {
         while (!gameToken.destroyCancellationToken.IsCancellationRequested)
         {
-            if (_stack.Count > 0 && BallsController.BALLS_COUNT < 500)
+            if (_stack.Count > 0 && BallsController.BALLS_COUNT < 700)
             {
                 var method = _stack.Pop();
                 await _ballsController.MultiThenAddBallToListAsync();

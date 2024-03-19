@@ -11283,6 +11283,7 @@ GameObject:
   - component: {fileID: 329521085}
   - component: {fileID: 329521089}
   - component: {fileID: 329521090}
+  - component: {fileID: 329521091}
   m_Layer: 0
   m_Name: MediaMaterial
   m_TagString: Untagged
@@ -11332,9 +11333,9 @@ VideoPlayer:
   m_DataSource: 1
   m_TimeUpdateMode: 1
   m_PlaybackSpeed: 1
-  m_AudioOutputMode: 2
+  m_AudioOutputMode: 1
   m_TargetAudioSources:
-  - {fileID: 0}
+  - {fileID: 519420034}
   m_DirectAudioVolumes:
   - 1
   m_Url: 
@@ -11387,6 +11388,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VideoPlayer: {fileID: 329521086}
+--- !u!114 &329521091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329521084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b28ea55a701af34d8fc4ca11a6508e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &330607188
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41380,7 +41393,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 10.8, y: 3.41}
+    oldSize: {x: 10.8, y: 3.4171877}
     newSize: {x: 10, y: 0.7}
     adaptiveTilingThreshold: 0.5
     drawMode: 1

@@ -33,7 +33,7 @@ public abstract class Block : MonoBehaviour
     }
     private void DestroyBlock()
     {
-        if (BallsController.BALLS_COUNT < 300)
+        if (BallsController.BALLS_COUNT < 350)
         {
             switch (Random.Range(0, 100))
             {
