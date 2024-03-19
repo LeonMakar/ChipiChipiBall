@@ -9,6 +9,7 @@ TagManager:
   - LeftPaddle
   - RightPaddle
   - GameOver
+  - Bonus
   layers:
   - Default
   - TransparentFX

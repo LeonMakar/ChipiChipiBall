@@ -98,3 +98,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _paddleSpeed: 25
+  _rigidBody: {fileID: 0}

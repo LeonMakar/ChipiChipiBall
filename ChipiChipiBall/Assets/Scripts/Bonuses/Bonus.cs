@@ -9,7 +9,6 @@ public abstract class Bonus : MonoBehaviour
     private void Construct(BallsController ballsController)
     {
         BallController = ballsController;
-
     }
 
 }

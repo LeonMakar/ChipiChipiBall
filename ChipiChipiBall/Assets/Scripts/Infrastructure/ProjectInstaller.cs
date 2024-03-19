@@ -1,3 +1,4 @@
+
 using Zenject;
 public class ProjectInstaller : MonoInstaller, IInitializable
 {
@@ -10,7 +11,24 @@ public class ProjectInstaller : MonoInstaller, IInitializable
     {
         BindInstallerInterfases();
         BindDefaultActionMap();
+        BindLoader();
+        BindSaver();
+    }
 
+    private void BindSaver()
+    {
+        Container
+            .Bind<Saver>()
+            .AsSingle()
+            .NonLazy();
+    }
+
+    private void BindLoader()
+    {
+        Container
+            .Bind<Loader>()
+            .AsSingle()
+            .NonLazy();
     }
 
     private void BindDefaultActionMap()

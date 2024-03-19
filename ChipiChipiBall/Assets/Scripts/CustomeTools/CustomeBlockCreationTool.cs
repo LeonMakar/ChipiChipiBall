@@ -1,9 +1,10 @@
-using UnityEditor;
-using UnityEditor.EditorTools;
-using UnityEditor.UIElements;
 using UnityEngine;
-using UnityEngine.UIElements;
 
+#if UNITY_EDITOR
+using UnityEditor;
+using UnityEngine.UIElements;
+using UnityEditor.UIElements;
+using UnityEditor.EditorTools;
 [EditorTool("Place Objects Tool")]
 public class CustomeBlockCreationTool : EditorTool
 {
@@ -122,8 +123,8 @@ public class CustomeBlockCreationTool : EditorTool
         {
             var newObject = _prefabObjectField.value;
 
-            _startPoint = new Vector3(Mathf.RoundToInt(_startPoint.x), Mathf.RoundToInt(_startPoint.y), Mathf.RoundToInt(_startPoint.z));
-            _endPoint = new Vector3(Mathf.RoundToInt(_endPoint.x), Mathf.RoundToInt(_endPoint.y), Mathf.RoundToInt(_endPoint.z));
+            _startPoint = new Vector3(Mathf.FloorToInt(_startPoint.x), Mathf.FloorToInt(_startPoint.y), Mathf.FloorToInt(_startPoint.z));
+            _endPoint = new Vector3(Mathf.FloorToInt(_endPoint.x), Mathf.FloorToInt(_endPoint.y), Mathf.FloorToInt(_endPoint.z));
 
             int startX = (int)_startPoint.x;
             int startY = (int)_startPoint.y;
@@ -201,3 +202,4 @@ public class CustomeBlockCreationTool : EditorTool
     }
 
 }
+#endif

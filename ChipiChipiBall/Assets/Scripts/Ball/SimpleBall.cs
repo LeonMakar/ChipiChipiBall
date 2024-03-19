@@ -5,6 +5,7 @@ public class SimpleBall : MonoBehaviour, IBall
 {
     [SerializeField] private float _ballSpeed;
     [field: SerializeField] public Rigidbody2D Rigidbody { get; private set; }
+    public bool CanMylty = true;
 
 
     private PaddleMooving _paddleMooving;

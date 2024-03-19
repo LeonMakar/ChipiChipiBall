@@ -1,8 +1,9 @@
+
+#if UNITY_EDITOR
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.EditorTools;
 using UnityEngine;
-
 [EditorTool("Block Creator")]
 public class CustomeBlockMoovingTool : EditorTool
 {
@@ -35,3 +36,4 @@ public class CustomeBlockMoovingTool : EditorTool
 
 
 }
+#endif

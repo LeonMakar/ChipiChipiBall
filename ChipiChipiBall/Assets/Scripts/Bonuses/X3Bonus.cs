@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class X3Bonus : Bonus
@@ -5,10 +6,15 @@ public class X3Bonus : Bonus
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag != GlobalVariables.DEFAULT_TAG)
+        if (BallsController.BALLS_COUNT < 500)
         {
-            BallController.MultiPlyBy3AllBallsAsync().Forget();
-            gameObject.SetActive(false);
+            if (collision.tag == GlobalVariables.PLATFORM_TAG)
+            {
+                gameObject.SetActive(false);
+                BallController.MultiPlyBy3AllBallsAsync();
+            }
         }
+        else
+            gameObject.SetActive(false);
     }
 }
